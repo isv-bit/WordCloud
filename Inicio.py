@@ -182,9 +182,9 @@ st.markdown("""
 <div class="header-card">
     <h1 style="color:white;">☁️ WordCloud Studio</h1>
 
-    <p style="color:white; font-size:18px;">
+    <h2 style="color:white; font-size:18px;">
         Genera nubes de palabras visuales a partir de cualquier texto.
-    </p>
+    </h2>
 </div>
 """, unsafe_allow_html=True)
 
