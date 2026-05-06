@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import re
-import io
 from collections import Counter
 from wordcloud import WordCloud, STOPWORDS
 
@@ -21,7 +20,7 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-# NUEVOS ESTILOS
+# ESTILOS
 # ─────────────────────────────────────────────
 st.markdown("""
 <style>
@@ -110,6 +109,12 @@ textarea:focus, input[type="text"]:focus {
     box-shadow: 0 6px 18px rgba(37,99,235,0.25);
 }
 
+/* Tabla */
+[data-testid="stDataFrame"] {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
 /* Download button */
 [data-testid="stDownloadButton"] button {
     background: #111827 !important;
@@ -124,12 +129,6 @@ textarea:focus, input[type="text"]:focus {
     border-top: 5px solid #2563eb;
     padding: 18px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-}
-
-/* Expander */
-div[data-testid="stExpander"] {
-    border-radius: 14px !important;
-    border: 1px solid #dbeafe !important;
 }
 
 /* Wordcloud */
@@ -283,6 +282,7 @@ else:
 
     st.markdown("""
     <div class="section-card">
+
         <h3>📌 ¿Qué hace esta herramienta?</h3>
 
         <p>
