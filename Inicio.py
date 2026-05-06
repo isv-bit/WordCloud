@@ -10,165 +10,171 @@ from collections import Counter
 from wordcloud import WordCloud, STOPWORDS
 
 # ─────────────────────────────────────────────
-# CONFIG
+# CONFIGURACIÓN
 # ─────────────────────────────────────────────
 st.set_page_config(
     page_title="WordCloud Studio",
     page_icon="☁️",
-    layout="wide",
+    layout="wide"
 )
 
 # ─────────────────────────────────────────────
 # ESTILOS
 # ─────────────────────────────────────────────
-st.markdown("""
-<style>
+st.markdown(
+    """
+    <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* FUENTE */
-html, body, [class*="css"] {
-    font-family: 'Poppins', sans-serif;
-}
+    html, body, [class*="css"] {
+        font-family: 'Poppins', sans-serif;
+    }
 
-/* FONDO GENERAL */
-.stApp {
-    background-color: #0f172a !important;
-}
+    /* FONDO GENERAL */
+    .stApp {
+        background-color: #0f172a;
+    }
 
-/* SIDEBAR */
-[data-testid="stSidebar"] {
-    background-color: #111827 !important;
-    border-right: 2px solid #2563eb;
-}
+    /* SIDEBAR */
+    [data-testid="stSidebar"] {
+        background-color: #111827;
+        border-right: 2px solid #2563eb;
+    }
 
-[data-testid="stSidebar"] * {
-    color: white !important;
-}
+    [data-testid="stSidebar"] * {
+        color: white;
+    }
 
-/* TITULOS */
-h1 {
-    color: #60a5fa !important;
-    font-weight: 700 !important;
-}
+    /* TITULOS */
+    h1 {
+        color: #60a5fa !important;
+        font-weight: 700 !important;
+    }
 
-h2, h3 {
-    color: #93c5fd !important;
-}
+    h2, h3 {
+        color: #93c5fd !important;
+    }
 
-/* TEXTO */
-p, label, span {
-    color: #f3f4f6 !important;
-}
+    /* TEXTO */
+    p, label, span {
+        color: #f3f4f6;
+    }
 
-/* HEADER */
-.header-card {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    padding: 35px;
-    border-radius: 22px;
-    margin-bottom: 30px;
-    box-shadow: 0 8px 25px rgba(37,99,235,0.35);
-}
+    /* HEADER */
+    .header-card {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        padding: 35px;
+        border-radius: 22px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 25px rgba(37,99,235,0.35);
+    }
 
-/* CARDS */
-.section-card {
-    background: #111827;
-    border: 2px solid #2563eb;
-    padding: 25px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-}
+    /* CARDS */
+    .section-card {
+        background: #111827;
+        border: 2px solid #2563eb;
+        padding: 25px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    }
 
-/* INPUTS */
-textarea, input[type="text"] {
-    background-color: #1e293b !important;
-    color: white !important;
-    border: 2px solid #3b82f6 !important;
-    border-radius: 14px !important;
-}
+    /* INPUTS */
+    textarea, input[type="text"] {
+        background-color: #1e293b !important;
+        color: white !important;
+        border: 2px solid #3b82f6 !important;
+        border-radius: 14px !important;
+    }
 
-/* SELECT */
-[data-baseweb="select"] > div {
-    background-color: #1e293b !important;
-    border: 2px solid #3b82f6 !important;
-    border-radius: 14px !important;
-    color: white !important;
-}
+    /* SELECT */
+    [data-baseweb="select"] > div {
+        background-color: #1e293b !important;
+        border: 2px solid #3b82f6 !important;
+        border-radius: 14px !important;
+        color: white !important;
+    }
 
-/* BOTONES */
-.stButton > button {
-    background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 14px !important;
-    font-weight: 700 !important;
-    transition: 0.3s;
-}
+    /* BOTONES */
+    .stButton > button {
+        background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 14px !important;
+        font-weight: 700 !important;
+        transition: 0.3s;
+    }
 
-.stButton > button:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(37,99,235,0.35);
-}
+    .stButton > button:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 20px rgba(37,99,235,0.35);
+    }
 
-/* MÉTRICAS */
-[data-testid="metric-container"] {
-    background: #111827;
-    border: 2px solid #2563eb;
-    border-radius: 16px;
-    padding: 18px;
-}
+    /* MÉTRICAS */
+    [data-testid="metric-container"] {
+        background: #111827;
+        border: 2px solid #2563eb;
+        border-radius: 16px;
+        padding: 18px;
+    }
 
-[data-testid="metric-container"] * {
-    color: white !important;
-}
+    [data-testid="metric-container"] * {
+        color: white !important;
+    }
 
-/* TABLAS */
-[data-testid="stDataFrame"] {
-    background-color: #111827 !important;
-    border-radius: 16px;
-    overflow: hidden;
-}
+    /* TABLAS */
+    [data-testid="stDataFrame"] {
+        background-color: #111827 !important;
+        border-radius: 16px;
+        overflow: hidden;
+    }
 
-/* CONTENEDOR NUBE */
-.wc-container {
-    background: #111827;
-    border: 2px solid #2563eb;
-    border-radius: 20px;
-    padding: 20px;
-}
+    /* CONTENEDOR NUBE */
+    .wc-container {
+        background: #111827;
+        border: 2px solid #2563eb;
+        border-radius: 20px;
+        padding: 20px;
+        margin-top: 20px;
+    }
 
-/* TAGS */
-.uso-tag {
-    background: #2563eb;
-    color: white !important;
-    padding: 7px 16px;
-    border-radius: 30px;
-    display: inline-block;
-    margin: 5px;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
+    /* TAGS */
+    .uso-tag {
+        background: #2563eb;
+        color: white;
+        padding: 7px 16px;
+        border-radius: 30px;
+        display: inline-block;
+        margin: 5px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
 
-</style>
-""", unsafe_allow_html=True)
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # ─────────────────────────────────────────────
 # HEADER
 # ─────────────────────────────────────────────
-st.markdown("""
-<div class="header-card">
+st.markdown(
+    """
+    <div class="header-card">
 
-    <h1 style="color:white;">
-        ☁️ WordCloud Studio
-    </h1>
+        <h1 style="color:white;">
+            ☁️ WordCloud Studio
+        </h1>
 
-    <p style="color:white; font-size:18px;">
-        Genera nubes de palabras visuales a partir de cualquier texto.
-    </p>
+        <p style="color:white; font-size:18px;">
+            Genera nubes de palabras visuales a partir de cualquier texto.
+        </p>
 
-</div>
-""", unsafe_allow_html=True)
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # ─────────────────────────────────────────────
 # SIDEBAR
@@ -235,14 +241,13 @@ def generar_wordcloud(texto, colores, max_words):
         collocations=False
     ).generate(texto)
 
-    fig, ax = plt.subplots(figsize=(12,6))
+    fig, ax = plt.subplots(figsize=(12, 6))
     fig.patch.set_facecolor("#111827")
 
     ax.imshow(wc, interpolation="bilinear")
     ax.axis("off")
 
     return fig
-
 
 # ─────────────────────────────────────────────
 # APP
@@ -263,8 +268,6 @@ if generar and texto_input.strip():
         frecuencias.most_common(1)[0][0]
     )
 
-    st.markdown("<br>", unsafe_allow_html=True)
-
     # NUBE
     fig = generar_wordcloud(
         texto_limpio,
@@ -278,7 +281,8 @@ if generar and texto_input.strip():
 
     st.markdown('</div>', unsafe_allow_html=True)
 
-    st.markdown("### 📊 Frecuencia de palabras")
+    # TABLA
+    st.markdown("## 📊 Frecuencia de palabras")
 
     df = pd.DataFrame(
         frecuencias.items(),
@@ -295,23 +299,26 @@ if generar and texto_input.strip():
 
 else:
 
-    st.markdown("""
-    <div class="section-card">
+    st.markdown(
+        """
+        <div class="section-card">
 
-        <h2>📌 ¿Qué hace esta herramienta?</h2>
+            <h2>📌 ¿Qué hace esta herramienta?</h2>
 
-        <p>
-        Esta aplicación genera una nube de palabras a partir de cualquier texto,
-        resaltando visualmente las palabras más frecuentes.
-        </p>
+            <p>
+                Esta aplicación genera una nube de palabras a partir de cualquier texto,
+                resaltando visualmente las palabras más frecuentes.
+            </p>
 
-        <br>
+            <br>
 
-        <span class="uso-tag">📚 Educación</span>
-        <span class="uso-tag">📊 Análisis</span>
-        <span class="uso-tag">📰 Noticias</span>
-        <span class="uso-tag">💬 Comentarios</span>
-        <span class="uso-tag">🤖 IA</span>
+            <span class="uso-tag">📚 Educación</span>
+            <span class="uso-tag">📊 Análisis</span>
+            <span class="uso-tag">📰 Noticias</span>
+            <span class="uso-tag">💬 Comentarios</span>
+            <span class="uso-tag">🤖 IA</span>
 
-    </div>
-    """, unsafe_allow_html=True)
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
