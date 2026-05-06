@@ -5,7 +5,6 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
-import numpy as np
 import re
 from collections import Counter
 from wordcloud import WordCloud, STOPWORDS
@@ -151,27 +150,6 @@ textarea, input[type="text"] {
     font-weight: 600;
 }
 
-/* DATAFRAME */
-table {
-    color: white !important;
-}
-
-/* EXPANDER */
-.streamlit-expanderHeader {
-    background-color: #111827 !important;
-    color: white !important;
-}
-
-/* SCROLL */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #2563eb;
-    border-radius: 10px;
-}
-
 </style>
 """, unsafe_allow_html=True)
 
@@ -180,12 +158,15 @@ table {
 # ─────────────────────────────────────────────
 st.markdown("""
 <div class="header-card">
-    <h1 style="color:white;">☁️ WordCloud Studio</h1>
+
+    <h1 style="color:white;">
+        ☁️ WordCloud Studio
+    </h1>
 
     <p style="color:white; font-size:18px;">
-    
         Genera nubes de palabras visuales a partir de cualquier texto.
     </p>
+
 </div>
 """, unsafe_allow_html=True)
 
