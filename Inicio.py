@@ -1,5 +1,5 @@
 """
-☁️ WordCloud Studio — Nube de Palabras Profesional
+☁️ WordCloud Studio — Nube de Palabras
 """
 
 import streamlit as st
@@ -27,129 +27,149 @@ st.markdown("""
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+/* FUENTE */
 html, body, [class*="css"] {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Fondo */
+/* FONDO GENERAL */
 .stApp {
-    background-color: #f8fafc;
+    background-color: #0f172a !important;
 }
 
-/* Sidebar */
+/* SIDEBAR */
 [data-testid="stSidebar"] {
-    background-color: #ffffff !important;
-    border-right: 2px solid #dbeafe;
+    background-color: #111827 !important;
+    border-right: 2px solid #2563eb;
 }
 
-/* Títulos */
+[data-testid="stSidebar"] * {
+    color: white !important;
+}
+
+/* TITULOS */
 h1 {
-    color: #2563eb !important;
+    color: #60a5fa !important;
     font-weight: 700 !important;
 }
 
 h2, h3 {
-    color: #1e40af !important;
+    color: #93c5fd !important;
 }
 
-/* Texto */
-p, li, label {
-    color: #374151 !important;
+/* TEXTO */
+p, label, span {
+    color: #f3f4f6 !important;
 }
 
-/* Header */
+/* HEADER */
 .header-card {
-    background: white;
-    padding: 30px;
-    border-radius: 18px;
-    border-left: 8px solid #2563eb;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    margin-bottom: 25px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    padding: 35px;
+    border-radius: 22px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(37,99,235,0.35);
 }
 
-/* Cards */
+/* CARDS */
 .section-card {
-    background: white;
+    background: #111827;
+    border: 2px solid #2563eb;
     padding: 25px;
-    border-radius: 18px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    border-radius: 20px;
     margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
 }
 
-/* Inputs */
+/* INPUTS */
 textarea, input[type="text"] {
-    border-radius: 12px !important;
-    border: 2px solid #bfdbfe !important;
+    background-color: #1e293b !important;
+    color: white !important;
+    border: 2px solid #3b82f6 !important;
+    border-radius: 14px !important;
 }
 
-textarea:focus, input[type="text"]:focus {
-    border-color: #2563eb !important;
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.15) !important;
-}
-
-/* Selectbox */
+/* SELECT */
 [data-baseweb="select"] > div {
-    border-radius: 12px !important;
-    border: 2px solid #bfdbfe !important;
+    background-color: #1e293b !important;
+    border: 2px solid #3b82f6 !important;
+    border-radius: 14px !important;
+    color: white !important;
 }
 
-/* Botones */
+/* BOTONES */
 .stButton > button {
     background: linear-gradient(90deg, #2563eb, #60a5fa) !important;
     color: white !important;
     border: none !important;
-    border-radius: 12px !important;
-    font-weight: 600 !important;
+    border-radius: 14px !important;
+    font-weight: 700 !important;
     transition: 0.3s;
 }
 
 .stButton > button:hover {
     transform: scale(1.03);
-    box-shadow: 0 6px 18px rgba(37,99,235,0.25);
+    box-shadow: 0 8px 20px rgba(37,99,235,0.35);
 }
 
-/* Tabla */
+/* MÉTRICAS */
+[data-testid="metric-container"] {
+    background: #111827;
+    border: 2px solid #2563eb;
+    border-radius: 16px;
+    padding: 18px;
+}
+
+[data-testid="metric-container"] * {
+    color: white !important;
+}
+
+/* TABLAS */
 [data-testid="stDataFrame"] {
-    border-radius: 14px;
+    background-color: #111827 !important;
+    border-radius: 16px;
     overflow: hidden;
 }
 
-/* Download button */
-[data-testid="stDownloadButton"] button {
-    background: #111827 !important;
-    color: white !important;
-    border-radius: 12px !important;
-}
-
-/* Metrics */
-[data-testid="metric-container"] {
-    background: white;
-    border-radius: 14px;
-    border-top: 5px solid #2563eb;
-    padding: 18px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-}
-
-/* Wordcloud */
+/* CONTENEDOR NUBE */
 .wc-container {
-    background: white;
-    border-radius: 18px;
+    background: #111827;
+    border: 2px solid #2563eb;
+    border-radius: 20px;
     padding: 20px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
 }
 
-/* Tags */
+/* TAGS */
 .uso-tag {
-    background: #dbeafe;
-    color: #1e3a8a;
-    padding: 6px 14px;
+    background: #2563eb;
+    color: white !important;
+    padding: 7px 16px;
     border-radius: 30px;
     display: inline-block;
-    margin: 4px;
+    margin: 5px;
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 600;
+}
+
+/* DATAFRAME */
+table {
+    color: white !important;
+}
+
+/* EXPANDER */
+.streamlit-expanderHeader {
+    background-color: #111827 !important;
+    color: white !important;
+}
+
+/* SCROLL */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2563eb;
+    border-radius: 10px;
 }
 
 </style>
@@ -160,9 +180,10 @@ textarea:focus, input[type="text"]:focus {
 # ─────────────────────────────────────────────
 st.markdown("""
 <div class="header-card">
-    <h1>☁️ WordCloud Studio</h1>
-    <p>
-        Genera nubes de palabras profesionales para visualizar los términos más frecuentes de un texto.
+    <h1 style="color:white;">☁️ WordCloud Studio</h1>
+
+    <p style="color:white; font-size:18px;">
+        Genera nubes de palabras visuales a partir de cualquier texto.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -172,24 +193,24 @@ st.markdown("""
 # ─────────────────────────────────────────────
 with st.sidebar:
 
-    st.markdown("## ⚙️ Configuración")
+    st.title("⚙️ Configuración")
 
     texto_input = st.text_area(
-        "✍️ Ingresa tu texto:",
+        "✍️ Ingresa un texto",
         height=220,
-        placeholder="Escribe o pega aquí un texto..."
+        placeholder="Escribe o pega aquí tu texto..."
     )
 
-    st.markdown("---")
-
     paleta = st.selectbox(
-        "🎨 Paleta de colores",
-        ["Azul", "Verde", "Terracota", "Grises"]
+        "🎨 Paleta",
+        ["Azul", "Verde", "Terracota", "Morado"]
     )
 
     max_words = st.slider(
         "🔠 Máximo de palabras",
-        20, 200, 80
+        20,
+        200,
+        80
     )
 
     generar = st.button("☁️ Generar nube")
@@ -202,15 +223,18 @@ def limpiar_texto(texto):
     texto = re.sub(r"[^a-záéíóúüñ\s]", " ", texto)
     return texto
 
+
 def contar_palabras(texto):
     return Counter(texto.split())
 
+
 PALETAS = {
-    "Azul": ["#2563eb", "#60a5fa", "#1e40af"],
-    "Verde": ["#059669", "#10b981", "#047857"],
-    "Terracota": ["#c2410c", "#ea580c", "#fb923c"],
-    "Grises": ["#111827", "#374151", "#9ca3af"]
+    "Azul": ["#2563eb", "#60a5fa", "#93c5fd"],
+    "Verde": ["#059669", "#10b981", "#6ee7b7"],
+    "Terracota": ["#c2410c", "#ea580c", "#fdba74"],
+    "Morado": ["#7c3aed", "#8b5cf6", "#c4b5fd"]
 }
+
 
 def generar_wordcloud(texto, colores, max_words):
 
@@ -222,20 +246,24 @@ def generar_wordcloud(texto, colores, max_words):
     wc = WordCloud(
         width=1000,
         height=500,
-        background_color="white",
+        background_color="#111827",
         stopwords=set(STOPWORDS),
         max_words=max_words,
-        color_func=color_func
+        color_func=color_func,
+        collocations=False
     ).generate(texto)
 
     fig, ax = plt.subplots(figsize=(12,6))
+    fig.patch.set_facecolor("#111827")
+
     ax.imshow(wc, interpolation="bilinear")
     ax.axis("off")
 
     return fig
 
+
 # ─────────────────────────────────────────────
-# GENERAR
+# APP
 # ─────────────────────────────────────────────
 if generar and texto_input.strip():
 
@@ -248,7 +276,10 @@ if generar and texto_input.strip():
 
     c1.metric("Palabras", len(texto_limpio.split()))
     c2.metric("Vocabulario", len(frecuencias))
-    c3.metric("Más frecuente", frecuencias.most_common(1)[0][0])
+    c3.metric(
+        "Más frecuente",
+        frecuencias.most_common(1)[0][0]
+    )
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -265,7 +296,6 @@ if generar and texto_input.strip():
 
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # TABLA
     st.markdown("### 📊 Frecuencia de palabras")
 
     df = pd.DataFrame(
@@ -276,14 +306,17 @@ if generar and texto_input.strip():
         ascending=False
     )
 
-    st.dataframe(df.head(20), use_container_width=True)
+    st.dataframe(
+        df.head(20),
+        use_container_width=True
+    )
 
 else:
 
     st.markdown("""
     <div class="section-card">
 
-        <h3>📌 ¿Qué hace esta herramienta?</h3>
+        <h2>📌 ¿Qué hace esta herramienta?</h2>
 
         <p>
         Esta aplicación genera una nube de palabras a partir de cualquier texto,
